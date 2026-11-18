@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#191d19">
+  <title>Боулдеринг · Таймер ротаций</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <div id="operator" class="operator">
+    <header class="topbar">
+      <span class="identity"><span class="mark" aria-hidden="true"></span> Боулдеринг</span>
+      <button class="button top-button" id="open-display">Открыть второе окно <span aria-hidden="true">↗</span></button>
+    </header>
+
+    <main>
+      <h1>Таймер ротаций</h1>
+      <div class="workspace">
+        <section class="console" aria-label="Пульт таймера">
+          <div class="clock clock-preview" data-clock data-phase="ready">
+            <div class="clock-meta"><span class="phase" data-label role="status">Готов к старту</span><span data-round>Ротация 1</span></div>
+            <div class="digits" data-time role="timer" aria-label="Оставшееся время">05:00</div>
+            <div class="progress" aria-hidden="true"><div data-progress></div></div>
+          </div>
+          <div class="controls">
+            <button class="button primary" id="toggle">Старт</button>
+            <button class="button" id="reset" disabled>Сбросить</button>
+            <button class="button fullscreen-button" id="operator-fullscreen">На весь экран <span aria-hidden="true">⛶</span></button>
+          </div>
+          <p id="message" class="message" role="status" hidden></p>
+        </section>
+
+        <section class="settings" aria-labelledby="settings-title">
+          <h2 id="settings-title">Настройки</h2>
+          <fieldset id="timing">
+            <label for="duration">Время ротации</label>
+            <select id="duration">
+              <option value="240">4 минуты</option>
+              <option value="300" selected>5 минут</option>
+              <option value="360">6 минут</option>
+            </select>
+            <label for="rotations">Количество ротаций</label>
+            <input id="rotations" type="number" min="0" max="999" step="1" value="0" aria-describedby="rotations-hint">
+            <p class="hint" id="rotations-hint">0 — до ручной остановки. Между ротациями 15 секунд на чистку трасс.</p>
+          </fieldset>
+          <div class="sound">
+            <h3>Звуковые сигналы</h3>
+            <p class="hint">Старт, предупреждение за минуту и конец ротации.</p>
+            <label class="check"><input id="ten-second" type="checkbox"> Дополнительно за 10 секунд</label>
+            <label class="volume" for="volume">Громкость <output id="volume-value" for="volume">80%</output></label>
+            <input id="volume" type="range" min="0" max="100" value="80">
+            <button class="button test-button" id="test-sound">Проверить звук</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <section class="clock scoreboard" id="scoreboard" data-clock data-phase="ready" aria-label="Табло соревнований" hidden>
+    <div class="clock-meta"><span class="phase" data-label role="status">Готов к старту</span><span data-round>Ротация 1</span></div>
+    <div class="digits" data-time role="timer" aria-label="Оставшееся время">05:00</div>
+    <div class="progress" aria-hidden="true"><div data-progress></div></div>
+    <button class="board-button" id="board-toggle" hidden>Старт</button>
+    <button class="board-button" id="board-fullscreen">На весь экран</button>
+  </section>
+</body>
+</html>
